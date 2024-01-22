@@ -2,7 +2,9 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:mobile/latsol.dart';
 import 'package:mobile/materi.dart';
+import 'package:mobile/tampilanAwal.dart';
 import 'profil.dart';
+import 'service/auth_service/Logout_service.dart';
 import 'surah.dart';
 
 class Home extends StatelessWidget {
@@ -311,7 +313,7 @@ class _HomeScreenState extends State<HomeScreen> {
             label: '',
           ),
         ],
-        onTap: (index) {
+        onTap: (index) async {
           setState(() {
             _currentIndex = index;
           });
@@ -326,6 +328,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               );
             case 2:
+              await Logout_service.logout();
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => TampilanAwal()),
+              );
               break;
           }
         },

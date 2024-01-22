@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:mobile/home.dart';
+import 'package:mobile/tampilanAwal.dart';
 import 'editProfil.dart';
+import 'service/auth_service/Logout_service.dart';
 import 'service/profil_service/Profil_service.dart';
 import 'updatePassword.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -378,7 +380,7 @@ class _ProfilState extends State<Profil> {
               label: '',
             ),
           ],
-          onTap: (index) {
+          onTap: (index) async {
             setState(() {
               _currentIndex = index;
             });
@@ -401,6 +403,11 @@ class _ProfilState extends State<Profil> {
                 );
                 break;
               case 2:
+                await Logout_service.logout();
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => TampilanAwal()),
+                );
                 break;
             }
           },
